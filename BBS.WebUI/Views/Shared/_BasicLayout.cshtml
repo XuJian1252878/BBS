@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="~/Content/framework/materialize/css/materialize.css" media="screen,projection" />
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="~/Scripts/jquery-1.8.2.js" ></script>
+    <script type="text/javascript" src="~/Content/framework/materialize/js/materialize.js"></script>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+
+    <!-- Dropdown Structure -->
+    <ul id="WebNavHead" class="dropdown-content">
+        <li><a href="#!">one</a></li>
+        @if (Session["User"] != null)
+        {
+            <li class="divider"></li>
+            <li><a href="User/Management">Management</a></li>
+            <li class="divider"></li>
+            <li><a href="@Url.Action("LogOut", "User")">Log Out</a></li>
+        }
+    </ul>
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#!" class="brand-logo">Logo</a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="sass.html"><i class="mdi-action-search"></i></a></li>
+                    <li><a href="components.html"><i class="mdi-action-view-module"></i></a></li>
+                    @if (Session["User"] != null)
+                    {
+                        <li>
+                            <a href="#">
+                                <div class="row">
+                                    <div class="col s12">
+                                        <img width="30" height="30" src="@Url.Action("GetHeadPortrait", "User", new { id = -1 })" alt="image" />
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    }
+                    <!-- Dropdown Trigger -->
+                    <li><a class="dropdown-button" href="#!" data-activates="WebNavHead"><i class="mdi-navigation-more-vert right"></i></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <!--temp data good message-->
+    <div class="container">
+        @if (TempData["info"] != null)
+        {
+            <div class="row">
+                <div class="col s12">
+                    <div class="card-panel lighten-5 green-text center-align">
+                        <h6>@TempData["info"]</h6>
+                    </div>
+                </div>
+            </div>
+        }
+        else if (TempData["error"] != null)
+        {
+            <div class="row">
+                <div class="col s12">
+                    <div class="card-panel lighten-5 red-text center-align">
+                        <h6>@TempData["error"]</h6>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div>
+        @RenderBody()
+    </div>
+
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        <a class="btn-floating btn-large red">
+            <i class="large mdi-editor-mode-edit"></i>
+        </a>
+        <ul>
+            <li><a class="btn-floating red" href="/Home/Index"><i class="large mdi-action-home"></i></a></li>
+            <li><a class="btn-floating yellow darken-1"><i class="large mdi-editor-format-quote"></i></a></li>
+            <li><a class="btn-floating green"><i class="large mdi-editor-publish"></i></a></li>
+            <li><a class="btn-floating blue"><i class="large mdi-editor-attach-file"></i></a></li>
+        </ul>
+    </div>
+</body>
+</html>

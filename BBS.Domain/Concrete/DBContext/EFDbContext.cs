@@ -31,6 +31,12 @@ namespace BBS.Domain.Concrete.DBContext
             //The modelBuilder.Conventions.Remove statement in the OnModelCreating method prevents table names from being pluralized.
             //base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            //定义user和reply之间的一对多关系不涉及级联删除
+            modelBuilder.Entity<Reply>()
+                .HasRequired(reply => reply.User)
+                .WithMany(user => user.Replies)
+                .HasForeignKey(reply => reply.UserID)
+                .WillCascadeOnDelete(false);
         }
     }
 }

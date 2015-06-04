@@ -1,0 +1,123 @@
+﻿@model BBS.Domain.Entities.User
+
+@{
+    ViewBag.Title = "Management";
+    Layout = "~/Views/Shared/_BasicLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <div class="card-panel lighten-5 green-text center-align">
+                <h4>Management</h4>
+            </div>
+        </div>
+    </div>
+
+    <!--Tebs HTML structure-->
+    <div class="row">
+        <div class="col s12">
+            <ul class="tabs">
+                <li class="tab col s3"><a class="active" href="#UserInfo">UserInfo</a></li>
+                <li class="tab col s3"><a href="#test2">Test 2</a></li>
+                <li class="tab col s3"><a href="#test3">Test 3</a></li>
+                <li class="tab col s3"><a href="#test4">Test 4</a></li>
+            </ul>
+        </div>
+        <!--User Info Section-->
+        <div id="UserInfo" class="col s12">
+            <form name="user" action="/User/UpdateInfo" method="post" enctype="multipart/form-data">
+
+                <div class="row">
+                    <div class="col s3">
+                        <div class="col s12 center">
+                            <img width="150" height="150" src="@Url.Action("GetHeadPortrait", "User", new { id = Model.ID})" />
+                            <input name="ID" type="hidden" value="@Model.ID"/>
+                        </div>
+                        <div class="col s12 center offset-s2">
+                            <div class="file-field input-field center-align">
+                                <div class="btn waves-effect">
+                                    <span>Modify</span>
+                                    <input id="image" name="image" class="btn tooltipped"
+                                           type="file" data-position="bottom" data-delay="50" data-tooltip="Modify your Portrait!" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s9">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="mdi-action-account-circle prefix"></i>
+                                <input id="Name" name="Name" value="@Model.Name" type="text" class="validate">
+                                <label for="Name">Name</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <i class="mdi-communication-email prefix"></i>
+                                <input id="Email" name="Email" value="@Model.Email" type="email" class="validate">
+                                <label for="Email">Email</label>
+                            </div>
+
+                            <div class="input-field col s12">
+                                <i class="mdi-action-android prefix"></i>
+                                <input id="Job" name="Job" value="@Model.Job" type="text" class="validate">
+                                <label for="Job">Job</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <div class="row">
+                                    <div class="col s3">
+                                        <i class="mdi-action-android prefix"></i>
+                                        <label for="Age">Age</label>
+                                    </div>
+                                    <div class="col s9 offset-s3">
+                                        <p class="range-field">
+                                            <input type="range" id="Age" name="Age" value="@Model.Age" min="0" max="100" class="validate">
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-field col s12">
+                                <div class="row">
+                                    <div class="col s3">
+                                        <i class="mdi-action-accessibility prefix"></i>
+                                        <label>Sex</label>
+                                    </div>
+                                    <div class="col s9 offset-s3">
+                                        <input id="Sex_M" name="Sex" type="radio" class="with-gap"
+                                               @{  if (Model.Sex) {  @: checked
+                                                                                                                             } }>
+
+                                        <label for="Sex_M">Male</label>
+                                        <input id="Sex_F" name="Sex" type="radio" class="with-gap"
+                                               @{ if (!Model.Sex) { @: checked
+                                                                                                                             } }>
+                                        <label for="Sex_F">Female</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-field col s12">
+                                <i class="mdi-action-accessibility prefix"></i>
+                                <input id="Province" name="Province" value="@Model.Province" type="text" class="validate">
+                                <label for="Province">Province</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <i class="mdi-action-accessibility prefix"></i>
+                                <input id="City" name="City" value="@Model.City" type="text" class="validate">
+                                <label for="City">City</label>
+                            </div>
+
+                            <div class="center">
+                                <button class="btn waves-effect waves-light" type="submit" name="action">
+                                    Update
+                                    <i class="mdi-content-send right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="test2" class="col s12">Test 2</div>
+        <div id="test3" class="col s12">Test 3</div>
+        <div id="test4" class="col s12">Test 4</div>
+    </div>
+</div>

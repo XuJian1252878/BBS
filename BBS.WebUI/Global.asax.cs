@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BBS.WebUI.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,10 +19,16 @@ namespace BBS.WebUI
         {
             AreaRegistration.RegisterAllAreas();
 
+            //注册依赖解析器
+            DependencyResolver.SetResolver(new NinjectDependencyResolver());
+
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            //告诉MVC框架希望使用NinjectControllerFactory类来创建控制器对象。
+            ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory());
         }
     }
 }

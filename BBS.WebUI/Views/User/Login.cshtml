@@ -1,0 +1,75 @@
+﻿@model BBS.WebUI.Models.UserViewModel.LoginViewModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_BasicLayout.cshtml";
+}
+
+
+<script type="text/javascript">
+    function userAccountCheck() {
+        var userAccount = document.getElementById("UserAccount").value;
+        if (userAccount.length <= 0) {
+            alert("用户名不能为空!!!");
+            return false;
+        } else if (userAccount.length < 3 || userAccount.length > 10) {
+            alert("用户名的长度必须在3~10之间");
+            return false;
+        }
+        return true;
+    }
+
+    function passwordCheck() {
+        var password = document.getElementById("Password").value;
+        if (password.length <= 0) {
+            alert("密码不能为空，请重新输入！");
+            return false;
+        } else if (password.length < 3 || password.length > 10) {
+            alert("密码长度必须在3~10位之间！");
+            return false;
+        }
+        return true;
+    }
+
+    function registerCheck() {
+        if (userAccountCheck() && passwordCheck()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <div class="card-panel lighten-5 green-text center-align">
+                <h4>Login</h4>
+            </div>
+        </div>
+
+        <div class="container">
+            <form id="registerForm" name="userLoginViewModel" action="/User/Login" class="col s12" method="post" onsubmit="return registerCheck()">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="mdi-action-account-circle prefix"></i>
+                        <input id="UserAccount" name="UserAccount" value="@Model.UserAccount" type="text" class="validate">
+                        <label for="UserAccount">UserAccount</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <i class="mdi-action-accessibility prefix"></i>
+                        <input id="Password" name="Password" type="password" class="validate">
+                        <label for="Password">Password</label>
+                    </div>
+                    <div class="col s12 offset-s4">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                            Login
+                            <i class="mdi-content-send right"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

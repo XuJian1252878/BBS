@@ -12,7 +12,7 @@ namespace BBS.Domain.Entities
         public string Name { get; set; }
         public string Password { get; set; }
         public int Permission { get; set; }//管理员权限等级
-        public byte[] ImageData { get; set; }//管理员头像图片
+        public string ImageData { get; set; }//管理员头像图片
         public string ImageMimeType { get; set; }//管理员头像图片格式
     }
 }

@@ -45,7 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\Base\ITypeRepository.cs" />
+    <Compile Include="Abstract\IUserRepository.cs" />
+    <Compile Include="Concrete\Base\EFTypeRepository.cs" />
     <Compile Include="Concrete\DBContext\EFDbContext.cs" />
+    <Compile Include="Concrete\EFUserRepository.cs" />
     <Compile Include="Entities\Admin.cs" />
     <Compile Include="Entities\Board.cs" />
     <Compile Include="Entities\Post.cs" />
