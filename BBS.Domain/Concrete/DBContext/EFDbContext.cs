@@ -15,7 +15,7 @@ namespace BBS.Domain.Concrete.DBContext
         {
             //The name of the connection string (which you'll add to the Web.config file later) is passed in to the constructor.
             //If you don't specify a connection string or the name of one explicitly, Entity Framework assumes that the connection string name is the same as the class name.
-
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<EFDbContext, BBS.Domain.Migrations.Configuration>("EFDbContext"));
         }
 
         //实体类与数据库表的映射配置
@@ -37,6 +37,11 @@ namespace BBS.Domain.Concrete.DBContext
                 .WithMany(user => user.Replies)
                 .HasForeignKey(reply => reply.UserID)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Board>().
+                HasOptional(board => board.ParentBoard).
+                WithMany(board => board.Boards).
+                HasForeignKey(board => board.ParentBoardID);
         }
     }
 }

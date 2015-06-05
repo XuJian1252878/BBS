@@ -1,0 +1,26 @@
+﻿@using BBS.Domain.Entities;
+@model IEnumerable<BBS.Domain.Entities.Post>
+
+@{
+    ViewBag.Title = "PostsInBoard";
+    Layout = "~/Views/Shared/_BasicLayout.cshtml";
+}
+
+<h2>PostsInBoard</h2>
+
+<div class="row container">
+    <div class="col s12">
+        <ul class="collapsible" data-collapsible="accordion">
+            @foreach (Post post in Model)
+            {
+                <li>
+                    <div class="collapsible-header"><i class="mdi-image-filter-drama"></i>@post.Title</div>
+                    <div class="collapsible-body">
+                        <p>@post.Content.Substring(0,100)</p>
+                        <p>@Html.ActionLink("查看详情","PostDetail","Post",new { postID = post.ID}, null)</p>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

@@ -91,22 +91,35 @@
                     <label for="City">City</label>
                 </div>
 
+                <script type="text/javascript">
+                    function readURL(input) {
+                        if (input.files && input.files[0]) {
+                            var reader = new FileReader();
+                            reader.onload = function (e) {
+                                document.getElementById('PreviewImg').src = e.target.result;
+                            }
+                            reader.readAsDataURL(input.files[0]);
+                        }
+                    }
+                </script>
+
                 <div class="file-field input-field col s6 offset-s3">
                     <input class="file-path validate">
                     <div class="btn waves-effect">
                         <span>Photo</span>
-                        <input id="image" name="image" type="file"/>
+                        <input id="image" name="image" type="file" onchange="readURL(this)"; />
                     </div>
                     <div class="editor-field">
-                        <img id="PreviewImg" width="150" height="150" alt="preview image" />
-                        @if(Model.ImageData == null)
-                        {
-                            @:None
+                        @{
+                            //http://stackoverflow.com/questions/23633675/asp-net-razor-if-syntax
+                            var imageSource = "";
+                            if (Model.ImageData != null)
+                            {
+                                imageSource = Url.Action("GetTempHeadPortrait", "User", Model.RouteValues);
+                            }
                         }
-                        else
-                        {
-                            <img width="150" height="150" src="@Url.Action("GetTempHeadPortrait", "User", Model.RouteValues)" alt="image" />
-                        }
+                        <img id="PreviewImg" width="150" height="150" src = "@imageSource"
+                              alt="preview image" />
                     </div>
                 </div>
             </div>

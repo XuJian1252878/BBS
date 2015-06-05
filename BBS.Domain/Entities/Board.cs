@@ -14,6 +14,10 @@ namespace BBS.Domain.Entities
         public string ImageData { get; set; }
         public string ImageMimeType { get; set; }
 
+        //一个板块可能会有父板块
+        public int? ParentBoardID { get; set; }
+        public virtual Board ParentBoard { get; set; }
+
         //一个父级板块可能会有多个子版块
         public virtual ICollection<Board> Boards { get; set; }
         //一个板块之内可能会有多个帖子

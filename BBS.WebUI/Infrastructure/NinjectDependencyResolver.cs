@@ -33,6 +33,9 @@ namespace BBS.WebUI.Infrastructure
         {
             //进行接口与其实现的绑定操作。
             kernel.Bind<IAccountService>().To<AccountService>();
+            kernel.Bind<IBoardService>().To<BoardService>();
+            kernel.Bind<IPostService>().To<PostService>();
+            kernel.Bind<IReplyService>().To<ReplyService>();
         }
     }
 }

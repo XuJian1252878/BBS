@@ -15,6 +15,9 @@ namespace BBS.Service.Module
         {
             //导入数据绑定。
             Bind<IUserRepository>().To<EFUserRepository>();
+            Bind<IBoardRepository>().To<EFBoardRepository>();
+            Bind<IPostRepository>().To<EFPostRepository>();
+            Bind<IReplyRepository>().To<EFReplyRepository>();
         }
     }
 }

@@ -132,7 +132,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\BoardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -149,10 +151,12 @@
     <Content Include="Content\framework\materialize\font\material-design-icons\Material-Design-Icons.svg" />
     <Content Include="Content\framework\materialize\js\materialize.js" />
     <Content Include="Content\framework\materialize\js\materialize.min.js" />
+    <Content Include="Content\images\office.jpg" />
     <Content Include="Content\images\s1.jpg" />
     <Content Include="Content\images\s2.jpg" />
     <Content Include="Content\images\s3.jpg" />
     <Content Include="Content\images\s5.jpg" />
+    <Content Include="Content\images\sample-1.jpg" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -264,6 +268,9 @@
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\SignUp.cshtml" />
     <Content Include="Views\User\Management.cshtml" />
+    <Content Include="Views\Board\ChildBoards.cshtml" />
+    <Content Include="Views\Post\PostsInBoard.cshtml" />
+    <Content Include="Views\Post\PostDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

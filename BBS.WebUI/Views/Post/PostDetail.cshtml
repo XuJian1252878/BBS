@@ -1,0 +1,83 @@
+﻿@using BBS.Domain.Entities;
+@model BBS.Domain.Entities.Post
+
+@{
+    ViewBag.Title = "PostDetail";
+    Layout = "~/Views/Shared/_BasicLayout.cshtml";
+}
+
+<h2>PostDetail</h2>
+
+<div class="container">
+    <div>
+        <h5 class="center-align">
+            @Model.Title
+        </h5>
+    </div>
+    <div class="row">
+        <div class="col s4">
+            板块 @Model.Board.Name
+        </div>
+        <div class="col s4">
+            发布人：@Model.User.Name
+        </div>
+        <div class="col s4">
+            发布时间：@Model.PublishTime
+        </div>
+    </div>
+    <div class="divider"></div>
+    <div class="row">
+        <div class="col s12">
+            @Model.Content
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="divider"></div>
+    <div class="left-align"><h5>评论区</h5></div>
+    <div class="divider"></div>
+    @foreach (Reply reply in Model.Replies)
+    {
+        <ul class="collection">
+            <li class="collection-item avatar">
+                <img src="@Url.Action("GetHeadPortrait", "User", new { id = reply.UserID })" alt="" class="circle " />
+                <span class="title">@reply.User.Name</span>
+                <p>
+                    发布时间：@reply.PublishTime
+                </p>
+            </li>
+        </ul>
+        <div class="row">
+            <div class="col s12">
+                <p>
+                    @reply.Content
+                </p>
+            </div>
+        </div>
+        <div class="divider"></div>
+    }
+    <div class="divider"></div>
+    <div class="left-align"><h5>发表评论：</h5></div>
+    <div class="row">
+        <form id="reply" class="col s12" method="post" action="@Url.Action("PostReply", "Post")">
+            @{
+                User sessionUser = (User)Session["User"];
+            }
+            <input id="UserID" type="hidden" value="@sessionUser.ID"/>
+            <input id="PostID" type="hidden" value="@Model.ID"/>
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="mdi-editor-mode-comment prefix"></i>
+                    <textarea id="Content" class="materialize-textarea" length="120"></textarea>
+                    <label for="myreply">Reply</label>
+                </div>
+            </div>
+            <div class="right-align">
+                <button class="btn waves-effect waves-light" type="submit" name="action">
+                    Reply
+                    <i class="mdi-content-send right"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

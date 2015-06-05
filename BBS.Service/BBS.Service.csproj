@@ -45,9 +45,15 @@
   <ItemGroup>
     <Compile Include="BusinessInterfaces\Base\IBaseService.cs" />
     <Compile Include="BusinessInterfaces\IAccountService.cs" />
+    <Compile Include="BusinessInterfaces\IBoardService.cs" />
+    <Compile Include="BusinessInterfaces\IPostService.cs" />
+    <Compile Include="BusinessInterfaces\IReplyService.cs" />
     <Compile Include="BusinessObject\UserViewModel\RegisterViewModel.cs" />
     <Compile Include="BusinessServices\AccountService.cs" />
     <Compile Include="BusinessServices\Base\BaseService.cs" />
+    <Compile Include="BusinessServices\BoardService.cs" />
+    <Compile Include="BusinessServices\PostService.cs" />
+    <Compile Include="BusinessServices\ReplyService.cs" />
     <Compile Include="Module\ServiceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
