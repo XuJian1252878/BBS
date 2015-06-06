@@ -49,9 +49,7 @@
         </ul>
         <div class="row">
             <div class="col s12">
-                <p>
-                    @reply.Content
-                </p>
+                <p>@reply.Content</p>
             </div>
         </div>
         <div class="divider"></div>
@@ -59,17 +57,18 @@
     <div class="divider"></div>
     <div class="left-align"><h5>发表评论：</h5></div>
     <div class="row">
-        <form id="reply" class="col s12" method="post" action="@Url.Action("PostReply", "Post")">
+        <form name="reply" class="col s12" method="post" action="@Url.Action("PostReply", "Post")">
             @{
                 User sessionUser = (User)Session["User"];
             }
-            <input id="UserID" type="hidden" value="@sessionUser.ID"/>
-            <input id="PostID" type="hidden" value="@Model.ID"/>
+            <input name="UserID" type="hidden" value="@sessionUser.ID"/>
+            <input name="PostID" type="hidden" value="@Model.ID"/>
+            <input name="PublishTime" type="hidden" value="@DateTime.Now"/>
             <div class="row">
                 <div class="input-field col s12">
                     <i class="mdi-editor-mode-comment prefix"></i>
-                    <textarea id="Content" class="materialize-textarea" length="120"></textarea>
-                    <label for="myreply">Reply</label>
+                    <textarea name="Content" class="materialize-textarea" length="120"></textarea>
+                    <label for="Content">Reply</label>
                 </div>
             </div>
             <div class="right-align">

@@ -1,0 +1,61 @@
+﻿@using BBS.Domain.Entities;
+@model BBS.Domain.Entities.Post
+
+@{
+    ViewBag.Title = "CreatePost";
+    Layout = "~/Views/Shared/_BasicLayout.cshtml";
+}
+<h2>CreatePost</h2>
+
+
+<div class="container">
+    <div class="row">
+        <form class="col s12">
+            
+        </form>
+    </div>
+    <div class="divider"></div>
+    <div class="left-align"><h6>帖子内容</h6></div>
+    <form name="newpost" action="@Url.Action("CreatePost", "Post")" method="post" enctype="multipart/form-data">
+        @{
+            int sessionUserID = -1;
+            if (Session["User"] != null)
+            {
+                sessionUserID = ((User)Session["User"]).ID;
+            }
+        }
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="mdi-editor-mode-edit prefix"></i>
+                <textarea id="Title" name="Title" class="materialize-textarea" length="20"></textarea>
+                <label for="Title">帖子标题</label>
+            </div>
+        </div>
+        <input id="PublishTime" name="PublishTime" value="@DateTime.Now" type="hidden" />
+        <input id="UserID" name="UserID" value="@sessionUserID" type="hidden" />
+        <input id="BoardID" name="BoardID" value="@Model.BoardID" type="hidden" />
+        <textarea cols="20" id="Content" name="Content" rows="30"></textarea>
+        <script type="text/javascript">
+            window.onload = function () {
+                var editor = CKEDITOR.replace('Content',
+                    {
+                        filebrowserBrowseUrl: '/Content/framework/ckfinder/ckfinder.html',
+                        filebrowserImageBrowseUrl: '/Content/framework/ckfinder/ckfinder.html?type=Images',
+                        filebrowserFlashBrowseUrl: '/Content/framework/ckfinder/ckfinder.html?type=Flash',
+                        filebrowserUploadUrl: '/Content/framework/ckfinder/core/connector/asp/connector.asp?command=QuickUpload&type=Files',
+                        filebrowserImageUploadUrl: '/Content/framework/ckfinder/core/connector/asp/connector.asp?command=QuickUpload&type=Images',
+                        filebrowserFlashUploadUrl: '/Content/framework/ckfinder/core/connector/asp/connector.asp?command=QuickUpload&type=Flash',
+                        htmlEncodeOutput: true
+                    });
+                CKFinder.setupCKEditor(editor, '/Content/framework/ckfinder/');
+            };
+        </script>
+        <div class="divider"></div>
+        <div class="right-align">
+            <button class="btn waves-effect waves-light" type="submit" name="action">
+                发表
+                <i class="mdi-content-send right"></i>
+            </button>
+        </div>
+    </form>
+</div>

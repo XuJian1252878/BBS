@@ -26,10 +26,35 @@ namespace BBS.WebUI.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult CreatePost()
+        {
+            Post post = new Post();
+            int boardID = -1;
+            System.Int32.TryParse(Request["boardID"], out boardID);
+            post.BoardID = boardID;
+            return View(post);
+        }
+
+        [HttpPost]
+        public ActionResult CreatePost(Post post)
+        {
+            if (postService.CreatePost(post))
+            {
+                TempData["info"] = "您的帖子发表成功！";
+                return RedirectToAction("PostsInBoard", "Post", new { boardID = post.BoardID });
+            }
+            else
+            {
+                TempData["error"] = "对不起! 您的帖子发表失败！";
+                return View(post);
+            }
+        }
 
         public ActionResult PostsInBoard(int boardID)
         {
             IEnumerable<Post> targetPost = postService.GetPostsByBoard(boardID);
+            ViewData["boardID"] = boardID;
             return View(targetPost);
         }
 
@@ -50,7 +75,7 @@ namespace BBS.WebUI.Controllers
             {
                 TempData["error"] = "评论发表失败！";
             }
-            return RedirectToAction()
+            return RedirectToAction("PostDetail", "Post", new { postID = reply.PostID });
         }
     }
 }

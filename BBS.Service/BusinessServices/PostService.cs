@@ -29,5 +29,14 @@ namespace BBS.Service.BusinessServices
             Post targetPost = postRepository.Find(post => post.ID == postID).FirstOrDefault();
             return targetPost;
         }
+
+        public bool CreatePost(Post post)
+        {
+            if(post.UserID <= 0)
+            {
+                return false;
+            }
+            return postRepository.Create(post);
+        }
     }
 }
