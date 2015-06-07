@@ -14,10 +14,12 @@ namespace BBS.WebUI.Controllers
     public class UserController : Controller
     {
         private IAccountService accountService;
+        private IPostService postService;
 
-        public UserController(IAccountService accountService)
+        public UserController(IAccountService accountService, IPostService postService)
         {
             this.accountService = accountService;
+            this.postService = postService;
         }
 
         //
@@ -126,6 +128,7 @@ namespace BBS.WebUI.Controllers
         //导航进入用户进入用户管理中心。
         public ActionResult Management()
         {
+            ViewData["UserPost"] = postService.GetPostByUser(((User)Session["User"]).ID);
             return View((User)Session["User"]);
         }
 

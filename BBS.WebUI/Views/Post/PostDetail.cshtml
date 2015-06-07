@@ -26,9 +26,12 @@
         </div>
     </div>
     <div class="divider"></div>
+    
+
     <div class="row">
-        <div class="col s12">
-            @Model.Content
+        <div id="postcontent" class="col s12" >
+            <!-- http://stackoverflow.com/questions/5029264/display-encoded-html-with-razor -->
+            @Html.Raw(HttpUtility.HtmlDecode(Model.Content))
         </div>
     </div>
 </div>
@@ -49,7 +52,7 @@
         </ul>
         <div class="row">
             <div class="col s12">
-                <p>@reply.Content</p>
+                <p>@Html.Raw(HttpUtility.HtmlDecode(reply.Content))</p>
             </div>
         </div>
         <div class="divider"></div>
@@ -66,9 +69,26 @@
             <input name="PublishTime" type="hidden" value="@DateTime.Now"/>
             <div class="row">
                 <div class="input-field col s12">
-                    <i class="mdi-editor-mode-comment prefix"></i>
+<!--                    <i class="mdi-editor-mode-comment prefix"></i>
                     <textarea name="Content" class="materialize-textarea" length="120"></textarea>
-                    <label for="Content">Reply</label>
+                    <label for="Content">Reply</label>  -->
+                    <textarea name="Content"></textarea>
+                    <script type="text/javascript">
+                        window.onload = function () {
+                            var editor = CKEDITOR.replace('Content',
+                                {
+                                    filebrowserBrowseUrl: '/Content/framework/ckfinder/ckfinder.html',
+                                    filebrowserImageBrowseUrl: '/Content/framework/ckfinder/ckfinder.html?type=Images',
+                                    filebrowserFlashBrowseUrl: '/Content/framework/ckfinder/ckfinder.html?type=Flash',
+                                    filebrowserUploadUrl: '/Content/framework/ckfinder/core/connector/asp/connector.asp?command=QuickUpload&type=Files',
+                                    filebrowserImageUploadUrl: '/Content/framework/ckfinder/core/connector/asp/connector.asp?command=QuickUpload&type=Images',
+                                    filebrowserFlashUploadUrl: '/Content/framework/ckfinder/core/connector/asp/connector.asp?command=QuickUpload&type=Flash',
+                                    htmlEncodeOutput: true
+                                });
+                            CKFinder.setupCKEditor(editor, '/Content/framework/ckfinder/');
+                        };
+                    </script>
+
                 </div>
             </div>
             <div class="right-align">

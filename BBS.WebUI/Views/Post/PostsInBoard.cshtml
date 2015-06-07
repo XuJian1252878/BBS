@@ -11,13 +11,13 @@
 <div class="container">
     <div class="row">
         <div class="col s12">
-            <ul class="collapsible" data-collapsible="accordion">
+            <ul class="collapsible popout" data-collapsible="accordion">
                 @foreach (Post post in Model)
                 {
                     <li>
                         <div class="collapsible-header"><i class="mdi-image-filter-drama"></i>@post.Title</div>
                         <div class="collapsible-body">
-                            <p>@post.Content.Substring(0, 100)</p>
+                            <p>@Html.Raw(HttpUtility.HtmlDecode(post.Content).ToString().Substring(0, 200))</p>
                             <p>@Html.ActionLink("查看详情", "PostDetail", "Post", new { postID = post.ID }, null)</p>
                         </div>
                     </li>

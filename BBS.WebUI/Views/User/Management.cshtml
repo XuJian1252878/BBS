@@ -1,4 +1,5 @@
-﻿@model BBS.Domain.Entities.User
+﻿@using BBS.Domain.Entities;
+@model BBS.Domain.Entities.User
 
 @{
     ViewBag.Title = "Management";
@@ -19,7 +20,7 @@
         <div class="col s12">
             <ul class="tabs">
                 <li class="tab col s3"><a class="active" href="#UserInfo">UserInfo</a></li>
-                <li class="tab col s3"><a href="#test2">Test 2</a></li>
+                <li class="tab col s3"><a href="#UserPost">UserPost</a></li>
                 <li class="tab col s3"><a href="#test3">Test 3</a></li>
                 <li class="tab col s3"><a href="#test4">Test 4</a></li>
             </ul>
@@ -116,7 +117,34 @@
                 </div>
             </form>
         </div>
-        <div id="test2" class="col s12">Test 2</div>
+        <!--显示用户发过的历史帖子-->
+        <div id="UserPost" class="col s12">
+            <ul class="collapsible popout" data-collapsible="accordion">
+                @{
+                    using (var enumerator = ((IEnumerable<Post>)ViewData["UserPost"]).GetEnumerator())
+                    {
+                        while (enumerator.MoveNext())
+                        {
+                            Post currentPost = enumerator.Current;
+                            <li>
+                                <div class="collapsible-header">
+                                    <i class="mdi-image-filter-drama"></i>
+                                    @currentPost.Title  发布时间：@currentPost.PublishTime   评论数：@currentPost.Replies.Count
+                                </div>
+                                <div class="collapsible-body">
+                                    <p>
+                                        @Html.Raw(HttpUtility.HtmlDecode(currentPost.Content).ToString().Substring(0, 200))
+                                    </p>
+                                    <p>
+                                        @Html.ActionLink("查看详情", "PostDetail", "Post", new { postID = currentPost.ID }, null)
+                                    </p>
+                                </div>
+                            </li>
+                        }
+                    }
+                }
+            </ul>
+        </div>
         <div id="test3" class="col s12">Test 3</div>
         <div id="test4" class="col s12">Test 4</div>
     </div>

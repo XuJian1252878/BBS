@@ -20,8 +20,13 @@ namespace BBS.Service.BusinessServices
 
         public IEnumerable<Post> GetPostsByBoard(int boardID)
         {
-            IEnumerable<Post> targetPosts = postRepository.Find(post => post.BoardID == boardID);
-            return targetPosts;
+            using (var enumerator = postRepository.Find(post => post.BoardID == boardID).GetEnumerator())
+            {
+                while(enumerator.MoveNext())
+                {
+                    yield return enumerator.Current;
+                }
+            }
         }
 
         public Post GetPostByID(int postID)
@@ -37,6 +42,19 @@ namespace BBS.Service.BusinessServices
                 return false;
             }
             return postRepository.Create(post);
+        }
+
+        public IEnumerable<Post> GetPostByUser(int userID)
+        {
+            using(var enumerator = postRepository.Find(post => post.UserID == userID).
+                OrderByDescending(post => post.PublishTime).
+                GetEnumerator())
+            {
+                while(enumerator.MoveNext())
+                {
+                    yield return enumerator.Current;
+                }
+            }
         }
     }
 }

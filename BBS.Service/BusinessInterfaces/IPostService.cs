@@ -12,5 +12,6 @@ namespace BBS.Service.BusinessInterfaces
         IEnumerable<Post> GetPostsByBoard(int boardID);
         Post GetPostByID(int postID);
         bool CreatePost(Post post);
+        IEnumerable<Post> GetPostByUser(int userID);
     }
 }
