@@ -22,10 +22,10 @@
     <!-- Dropdown Structure -->
     <ul id="WebNavHead" class="dropdown-content">
         <li><a href="#!">one</a></li>
+        <li class="divider"></li>
+        <li><a href="~/User/Management">Management</a></li>
         @if (Session["User"] != null)
         {
-            <li class="divider"></li>
-            <li><a href="~/User/Management">Management</a></li>
             <li class="divider"></li>
             <li><a href="@Url.Action("LogOut", "User")">Log Out</a></li>
         }

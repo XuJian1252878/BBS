@@ -65,6 +65,11 @@ namespace BBS.Service.BusinessServices
             return userRepository.UpdateUserInfo(user);
         }
 
+        public User GetUserByAccount(string accountName)
+        {
+            return userRepository.Find(user => user.Name == accountName || user.Email == accountName).FirstOrDefault();
+        }
+
         internal User GetUserFromRegisterInfo(RegisterViewModel registerInfo)
         {
             User user = new User();

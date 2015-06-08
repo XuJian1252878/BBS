@@ -13,5 +13,6 @@ namespace BBS.WebUI.Models.UserViewModel
         public string UserAccount { get; set; }
 
         public string Password { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }

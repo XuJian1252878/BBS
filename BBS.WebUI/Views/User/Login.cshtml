@@ -50,6 +50,7 @@
 
         <div class="container">
             <form id="registerForm" name="userLoginViewModel" action="/User/Login" class="col s12" method="post" onsubmit="return registerCheck()">
+                <input id="ReturnUrl" name="ReturnUrl" type="hidden" value="@Request.QueryString["ReturnUrl"]" />
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="mdi-action-account-circle prefix"></i>

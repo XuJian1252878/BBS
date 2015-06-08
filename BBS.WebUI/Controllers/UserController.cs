@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.Security;
 
 namespace BBS.WebUI.Controllers
 {
@@ -43,9 +44,17 @@ namespace BBS.WebUI.Controllers
             User user = accountService.Login(loginViewModel.UserAccount, loginViewModel.Password);
             if (user != null)
             {
+                FormsAuthentication.SetAuthCookie(loginViewModel.UserAccount, false);
                 Session["User"] = user;
                 TempData["info"] = user.Name + " login success!";
-                return RedirectToAction("Index", "Home");
+                if (loginViewModel.ReturnUrl != null && Url.IsLocalUrl(loginViewModel.ReturnUrl))
+                {
+                    return Redirect(loginViewModel.ReturnUrl);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
             else
             {
@@ -82,7 +91,8 @@ namespace BBS.WebUI.Controllers
 
         public ActionResult LogOut()
         {
-            Session["User"] = null;
+            Session.Abandon();//取消Session会话。
+            FormsAuthentication.SignOut();//删除Forms验证票证。
             return RedirectToAction("Index", "Home");
         }
 
@@ -126,6 +136,7 @@ namespace BBS.WebUI.Controllers
         }
 
         //导航进入用户进入用户管理中心。
+        [Authorize]
         public ActionResult Management()
         {
             ViewData["UserPost"] = postService.GetPostByUser(((User)Session["User"]).ID);
@@ -133,6 +144,7 @@ namespace BBS.WebUI.Controllers
         }
 
         //更新用户信息
+        [Authorize]
         public ActionResult UpdateInfo(User user, HttpPostedFileBase image)
         {
             if(image != null)
@@ -149,6 +161,12 @@ namespace BBS.WebUI.Controllers
             TempData["info"] = "Update user info success!";
             Session["User"] = accountService.GetUserByID(user.ID);
             return View("Management", (User)Session["User"]);
+        }
+
+        [Authorize]
+        public ActionResult AdminIndex()
+        {
+            return View();
         }
     }
 }

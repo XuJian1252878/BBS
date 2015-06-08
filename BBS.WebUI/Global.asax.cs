@@ -1,4 +1,7 @@
-﻿using BBS.WebUI.Infrastructure;
+﻿using BBS.Domain.Entities;
+using BBS.Service.BusinessInterfaces;
+using BBS.Service.BusinessServices;
+using BBS.WebUI.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +10,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Web.Security;
 
 namespace BBS.WebUI
 {

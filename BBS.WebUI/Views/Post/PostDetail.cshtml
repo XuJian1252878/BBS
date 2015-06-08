@@ -63,8 +63,11 @@
         <form name="reply" class="col s12" method="post" action="@Url.Action("PostReply", "Post")">
             @{
                 User sessionUser = (User)Session["User"];
+                if (sessionUser != null)
+                {
+                    <input name="UserID" type="hidden" value="@sessionUser.ID" />
+                }
             }
-            <input name="UserID" type="hidden" value="@sessionUser.ID"/>
             <input name="PostID" type="hidden" value="@Model.ID"/>
             <input name="PublishTime" type="hidden" value="@DateTime.Now"/>
             <div class="row">

@@ -149,6 +149,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\framework\bootstrap-tagsinput\bootstrap-tagsinput-angular.js" />
+    <Content Include="Content\framework\bootstrap-tagsinput\bootstrap-tagsinput-angular.min.js" />
+    <Content Include="Content\framework\bootstrap-tagsinput\bootstrap-tagsinput.css" />
+    <Content Include="Content\framework\bootstrap-tagsinput\bootstrap-tagsinput.js" />
+    <Content Include="Content\framework\bootstrap-tagsinput\bootstrap-tagsinput.min.js" />
     <Content Include="Content\framework\ckeditor\adapters\jquery.js" />
     <Content Include="Content\framework\ckeditor\build-config.js" />
     <Content Include="Content\framework\ckeditor\ckeditor.js" />
@@ -1197,6 +1202,9 @@
     <Content Include="Content\framework\ckeditor\skins\moono\readme.md" />
     <Content Include="Content\framework\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
     <Content Include="Content\framework\ckfinder\userfiles\.htaccess" />
+    <Content Include="Content\framework\bootstrap-tagsinput\bootstrap-tagsinput.less" />
+    <Content Include="Content\framework\bootstrap-tagsinput\bootstrap-tagsinput.min.js.map" />
+    <Content Include="Content\framework\bootstrap-tagsinput\bootstrap-tagsinput.zip" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -1235,6 +1243,7 @@
     <Content Include="Views\Post\PostsInBoard.cshtml" />
     <Content Include="Views\Post\PostDetail.cshtml" />
     <Content Include="Views\Post\CreatePost.cshtml" />
+    <Content Include="Views\User\AdminIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

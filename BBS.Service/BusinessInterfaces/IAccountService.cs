@@ -13,6 +13,7 @@ namespace BBS.Service.BusinessInterfaces
         bool Register(RegisterViewModel registeInfo);
         User Login(string accountName, string password);
         User GetUserByID(int userID);
+        User GetUserByAccount(string accountName);
         bool UpdateUserInfo(User user);
     }
 }

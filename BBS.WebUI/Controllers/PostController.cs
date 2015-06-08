@@ -26,7 +26,7 @@ namespace BBS.WebUI.Controllers
             return View();
         }
 
-        [HttpGet]
+        [Authorize, HttpGet]
         public ActionResult CreatePost()
         {
             Post post = new Post();
@@ -64,6 +64,7 @@ namespace BBS.WebUI.Controllers
             return View(targetPost);
         }
 
+        [Authorize]
         public ActionResult PostReply(Reply reply)
         {
             bool bResult = replyService.PostReply(reply);
